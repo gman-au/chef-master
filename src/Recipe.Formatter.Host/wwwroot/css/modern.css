@@ -1,0 +1,79 @@
+﻿body {
+    -webkit-print-color-adjust: exact !important;
+    font-family: 'Bree Serif', serif;
+}
+
+li {
+    list-style: none;
+    margin: 16pt;
+}
+
+ul {
+    padding-left: 8pt;
+}
+
+.background {
+    position: relative;
+}
+
+.col {
+    display: table-cell; 
+}
+
+.col-container {
+    display: table;
+    width: 100%; 
+}
+
+.foodImage {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.ingredients {
+    min-width: 215pt;
+}
+
+.instructions {
+    border-left: 3px solid rgba(218, 164, 99, 0.3) !important;
+}
+
+.print {
+    margin-bottom: 8pt;
+    margin-top: 8pt;
+}
+
+.sectionTitle {
+    border-bottom: 3px solid rgba(218, 164, 99, 0.3) !important;
+    color: rgba(218, 164, 99, 1.0) !important;
+    font-family: 'Crete Round', serif;
+    padding: 8pt;
+    padding-left: 24pt;
+}
+
+.separator-widget {
+    background-color: rgba(218, 164, 99, 0.5) !important;
+    display: inline;
+    margin-left: 4pt;
+}
+
+.subtitle {
+    font-family: 'Recursive', sans-serif;
+    font-size: 12pt;
+    font-variant-caps: all-small-caps;
+    font-weight: 500;
+    line-height: 1pt;
+    text-align: center;
+}
+
+.title {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    bottom: 0;
+    font-family: 'Gochi Hand', cursive;
+    font-size: 4.0vh;
+    padding: 15pt;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}

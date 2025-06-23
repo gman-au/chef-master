@@ -1,0 +1,63 @@
+﻿body {
+    -webkit-print-color-adjust: exact !important;
+    background-color: #f7f5ef !important;
+    font-family: 'IM Fell English', serif;
+}
+
+li {
+    list-style: none;
+    margin: 2pt;
+}
+
+ul {
+    margin: 16pt;
+    padding-left: 8pt;
+}
+
+.background {
+    position: relative;
+}
+
+.col {
+    display: table-cell;
+}
+
+.col-container {
+    display: table;
+    width: 100%;
+}
+
+.foodImage {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.indented {
+    text-indent: 12pt;
+}
+
+.print {
+    margin-bottom: 8pt;
+    margin-top: 8pt;
+}
+
+.offset {
+    color: #C42F8B !important;
+    margin-left: 10pt;
+}
+
+.sectionTitle {
+    color: #C42F8B !important;
+    font-family: 'Crete Round', serif;
+    padding: 8pt;
+    padding-left: 24pt;
+}
+
+.title {
+    border-bottom: 3px solid black;
+    font-family: 'Anton', sans-serif;
+    font-size: 5.0vh;
+    padding: 10pt;
+    width: 100%;
+}

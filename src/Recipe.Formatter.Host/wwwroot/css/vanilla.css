@@ -1,0 +1,20 @@
+﻿body {
+    font-family: 'Contrail One', cursive;
+}
+
+h3 {
+    color: green;
+}
+
+li {
+    list-style: none;
+    padding: 6pt;
+}
+
+.print {
+    margin: 8pt;
+}
+
+.title {
+    text-align: center;
+}

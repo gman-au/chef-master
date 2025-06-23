@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe.Formatter.Infrastructure", "Recipe.Formatter.Infrastructure\Recipe.Formatter.Infrastructure.csproj", "{9C3006EB-FEE0-4CDF-9A05-73056510581B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe.Formatter.ViewModel", "Recipe.Formatter.ViewModel\Recipe.Formatter.ViewModel.csproj", "{B262B0DD-70B5-420A-A38D-E401FF82E798}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe.Formatter.Host", "Recipe.Formatter.Host\Recipe.Formatter.Host.csproj", "{8582E956-8D6B-4F23-A048-E774A0DBA5A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C3006EB-FEE0-4CDF-9A05-73056510581B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C3006EB-FEE0-4CDF-9A05-73056510581B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C3006EB-FEE0-4CDF-9A05-73056510581B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C3006EB-FEE0-4CDF-9A05-73056510581B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B262B0DD-70B5-420A-A38D-E401FF82E798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B262B0DD-70B5-420A-A38D-E401FF82E798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B262B0DD-70B5-420A-A38D-E401FF82E798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B262B0DD-70B5-420A-A38D-E401FF82E798}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8582E956-8D6B-4F23-A048-E774A0DBA5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8582E956-8D6B-4F23-A048-E774A0DBA5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8582E956-8D6B-4F23-A048-E774A0DBA5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8582E956-8D6B-4F23-A048-E774A0DBA5A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
