@@ -1,10 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Html
 @using Microsoft.Extensions.Options
-@using Recipe.Formatter.Host
 @model Recipe.Formatter.ViewModel.StatusViewModel;
 @inject IOptions<MyBuildConfiguration> MyBuildConfiguration
 @{
-
     ViewData["Title"] = "Home Page";
 }
 
@@ -20,78 +18,100 @@
     }
 }
 
-<link rel="stylesheet" href="~/css/index.css" />
-
+<link rel="stylesheet" href="~/css/index.css"/>
+<br/>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 centered">
-            <h2>Recipe Formatter</h2>
-        </div>
-    </div>
-
-    @using (@Html.BeginForm("Process", "Home", FormMethod.Post))
-    {
-        <div class="row justify-content-sm-center">
-            <div class="col-sm-2">&nbsp;</div>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" name="url" value="@Model?.Url">
-                <small class="form-text text-muted">Put a web site link here and I will try to get the recipe from it.</small>
-                <input type="text" class="form-control" name="customImageUrl" value="@Model?.CustomImageUrl">
-                <small class="form-text text-muted">Custom image URL (if required).</small>
-            </div>
-            <div class="col-sm-2">&nbsp;</div>
-        </div>
-        <div class="row">&nbsp;</div>
-        <div class="row justify-content-sm-center">
-            <div class="col-xs-5">&nbsp;</div>
-            <div class="col-xs-2">
-                <div class="radio1" style="display: inline-block; white-space: nowrap;">
-                    <div class="radio">
-                        @Html.RadioButton("style", "Modern")
-                        @Html.Label("style", "Modern")
-                    </div>
-                    <div class="radio">
-                        @Html.RadioButton("style", "WomensWeekly")
-                        @Html.Label("style", "Womens Weekly")
-                    </div>
+    <div class="rounded-form">
+        @using (Html.BeginForm("Process", "Home", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-12 centered">
+                    <h2>Recipe Formatter</h2>
                 </div>
             </div>
-            <div class="col-xs-5">&nbsp;</div>
-        </div>
-        <div class="row">&nbsp;</div>
-        <div class="row justify-content-sm-center">
-            <div class="col-sm-5">&nbsp;</div>
-            <div class="col-sm-2">
-                <input class="btn btn-primary btn-block" type="submit" value="GO">
+            <div class="row justify-content-sm-center">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="url" value="@Model?.Url">
+                    <small class="form-text text-muted">Put a web site link here and I will try to get the recipe from it.</small>
+                    <input type="text" class="form-control" name="customImageUrl" value="@Model?.CustomImageUrl">
+                    <small class="form-text text-muted">Custom image URL (if required).</small>
+                </div>
+                <div class="col-sm-2">&nbsp;</div>
             </div>
-            <div class="col-sm-5">&nbsp;</div>
-        </div>
-        @if (Model != null)
-        {
             <div class="row">&nbsp;</div>
             <div class="row justify-content-sm-center">
-                <div class="col-md-12 centered">
-                    <div class="alert alert-danger" role="alert">
-                        @Model?.Message
+                <div class="col-xs-2">&nbsp;</div>
+                <div class="col-xs-8">
+                    <div class="radio1" style="display: inline; white-space: nowrap;">
+                        <div style="padding-bottom:10px;">
+                            <div class="row justify-content-sm-center">
+                                <div class="col-xs-6">
+                                    <img src="~/img/modern.PNG" class="style-preview"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        @Html.RadioButton("style", "Modern", true)
+                                        @Html.Label("style", "Modern")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-bottom:10px;">
+                            <div class="row justify-content-sm-center">
+                                <div class="col-xs-6">
+                                    <img src="~/img/womens-weekly.PNG" class="style-preview"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        @Html.RadioButton("style", "WomensWeekly")
+                                        @Html.Label("style", "Womens Weekly")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-xs-2">&nbsp;</div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row justify-content-sm-center">
                 <div class="col-sm-5">&nbsp;</div>
                 <div class="col-sm-2">
-                    @StatusIndicator("Can connect", Model.Stages.CanConnect)(null)
-                    @StatusIndicator("Can find", Model.Stages.CanFind)(null)
-                    @StatusIndicator("Can interpret", Model.Stages.CanInterpret)(null)
-                    @StatusIndicator("Can convert", Model.Stages.CanConvert)(null)
+                    <input class="btn btn-block btn-success" type="submit" value="GO">
                 </div>
                 <div class="col-sm-5">&nbsp;</div>
             </div>
+            @if (Model != null)
+            {
+                <div class="row">&nbsp;</div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-3">&nbsp;</div>
+                    <div class="col-md-6 centered">
+                        <div class="alert alert-danger" role="alert">
+                            @Model?.Message
+                        </div>
+                    </div>
+                    <div class="col-sm-3">&nbsp;</div>
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-5">&nbsp;</div>
+                    <div class="col-sm-2">
+                        @StatusIndicator("Can connect", Model.Stages.CanConnect)(null)
+                        @StatusIndicator("Can find", Model.Stages.CanFind)(null)
+                        @StatusIndicator("Can interpret", Model.Stages.CanInterpret)(null)
+                        @StatusIndicator("Can convert", Model.Stages.CanConvert)(null)
+                    </div>
+                    <div class="col-sm-5">&nbsp;</div>
+                </div>
+            }
+
+            <footer>
+                <hr/>
+                <p style="color: grey; font-size: 8pt; text-align: right">
+                    <i>Build @MyBuildConfiguration.Value.MyBuildNumber</i>
+                </p>
+            </footer>
         }
-        <footer>
-            <hr/>
-            <p style="color: grey; font-size: 8pt; text-align: right">
-                <i>Build @MyBuildConfiguration.Value.MyBuildNumber</i>
-            </p>
-        </footer>
-    }
+    </div>
 </div>
