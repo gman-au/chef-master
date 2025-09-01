@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Recipe.Formatter.Infrastructure.Extensions;
+using Recipe.Formatter.Interfaces;
 
 namespace Recipe.Formatter.Infrastructure
 {
     public class JsonStripper : IJsonStripper
     {
-        private const string ScriptRegexPattern = "\\<script type=\"application\\/(ld\\+json)\".*?\\<\\/script>";
+        //private const string ScriptRegexPattern = "\\<script type=\"application\\/(ld\\+json)\".*?\\<\\/script>";
+        private const string ScriptRegexPattern = @"<script\b[^>]*type\s*=\s*[""']application/ld\+json[""'][^>]*>(.*?)</script>";
         private const string JsonRegexPattern = "\\{.*\\}";
-        private const string RecipeRegexPattern = "\\\"@type\\\"[ ]?:[ ]?\\\"recipe\\\"";
+        private const string RecipeRegexPattern = "\\\"@type\\\"[ ]?:[ ]?[\\[]?\\\"recipe\\\"[\\]]?";
 
         public async Task<string> StripFromHtmlAsync(string html)
         {
@@ -46,7 +48,6 @@ namespace Recipe.Formatter.Infrastructure
                                     .Sanitise()
                                     .GetBackwardNestingOccurrence(recipeMatch.Index, '{', '}');
 
-                            // .GetPrecedingOccurrence(recipeMatch.Index, '{');
                             if (openIndex.HasValue)
                             {
                                 var closeIndex = jsonString.GetForwardNestingOccurrence(openIndex.Value, '{', '}');

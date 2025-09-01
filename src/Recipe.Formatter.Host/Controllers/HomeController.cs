@@ -1,20 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Recipe.Formatter.Infrastructure;
+using Recipe.Formatter.Interfaces;
 using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Host.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IEnumerable<IRecipeAdapter> recipeAdapters) : Controller
     {
-        private readonly IFormatterEngine _formatterEngine;
-
-        public HomeController(IFormatterEngine formatterEngine)
-        {
-            _formatterEngine = formatterEngine;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -28,11 +23,19 @@ namespace Recipe.Formatter.Host.Controllers
 
             try
             {
-                var response = await _formatterEngine.ProcessAsync(value);
-
-                if (response.Success)
+                var response = new RecipeParseResponseViewModel();
+                
+                foreach (var recipeAdapter in recipeAdapters.OrderBy(o => o.Order))
                 {
+                    response =
+                        await
+                            recipeAdapter
+                                .ProcessAsync(value);
+
+                    if (!response.Success) continue;
+
                     ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
+
                     return View(view, response);
                 }
 
