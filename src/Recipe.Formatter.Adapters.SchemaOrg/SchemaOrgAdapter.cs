@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Recipe.Formatter.Adapters.SchemaOrg.Factories;
@@ -76,10 +77,15 @@ namespace Recipe.Formatter.Adapters.SchemaOrg
 
                 response.Status.Stages.CanInterpret = true;
 
-                response.Recipe =
+                var recipe =
                     await
                         _responseFactory
                             .ForAsync(thing);
+
+                if (!(recipe?.Ingredients ?? []).Any() || !(recipe?.Instructions ?? []).Any())
+                    throw new Exception("No ingredients or instructions found");
+
+                response.Recipe = recipe;
 
                 response.Status.Stages.CanConvert = true;
 

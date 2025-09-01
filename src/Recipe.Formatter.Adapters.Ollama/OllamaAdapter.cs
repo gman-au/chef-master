@@ -15,6 +15,7 @@ namespace Recipe.Formatter.Adapters.Ollama
     public class OllamaAdapter : IRecipeAdapter
     {
         private readonly IHtmlDownloader _htmlDownloader;
+        private readonly IHtmlCleaner _htmlCleaner;
         private readonly ILogger<OllamaAdapter> _logger;
         private readonly IOllamaRequestBuilder _ollamaRequestBuilder;
 
@@ -24,11 +25,13 @@ namespace Recipe.Formatter.Adapters.Ollama
         public OllamaAdapter(
             ILogger<OllamaAdapter> logger,
             IOllamaRequestBuilder ollamaRequestBuilder,
-            IHtmlDownloader htmlDownloader)
+            IHtmlDownloader htmlDownloader,
+            IHtmlCleaner htmlCleaner)
         {
             _logger = logger;
             _ollamaRequestBuilder = ollamaRequestBuilder;
             _htmlDownloader = htmlDownloader;
+            _htmlCleaner = htmlCleaner;
         }
 
         public int Order { get; set; } = 2;
@@ -63,6 +66,10 @@ namespace Recipe.Formatter.Adapters.Ollama
                     await
                         _htmlDownloader
                             .DownloadAsync(request.Url);
+
+                html =
+                    _htmlCleaner
+                        .Clean(html);
 
                 response.Status.Stages.CanConnect = true;
 

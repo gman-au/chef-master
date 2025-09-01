@@ -5,19 +5,14 @@ using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Adapters.Ollama
 {
-    public class OllamaRequestBuilder : IOllamaRequestBuilder
+    public class OllamaRequestBuilder(ISchemaGenerator schemaGenerator) : IOllamaRequestBuilder
     {
-        private readonly ISchemaGenerator _schemaGenerator;
-
-        public OllamaRequestBuilder(ISchemaGenerator schemaGenerator)
-        {
-            _schemaGenerator = schemaGenerator;
-        }
+        private const string ModelName = "phi3:mini";
 
         public OllamaRequest Build(string html)
         {
             var schemaString =
-                _schemaGenerator
+                schemaGenerator
                     .Generate(typeof(RecipeViewModel));
 
             var prompt = new StringBuilder();
@@ -30,10 +25,14 @@ namespace Recipe.Formatter.Adapters.Ollama
 
             return new OllamaRequest
             {
-                Model = "llama3.1:8b",
+                Model = ModelName,
                 Prompt = prompt.ToString(),
                 Format = "json",
-                Stream = false
+                Stream = false,
+                Options = new OllamaRequestOptions
+                {
+                    NumCtx = 65536
+                }
             };
         }
     }

@@ -1,2 +1,2 @@
 ﻿FROM ollama/ollama
-RUN ollama serve & sleep 5 && ollama pull llama3.1:8b
+RUN ollama serve & sleep 5 && ollama pull phi3:mini

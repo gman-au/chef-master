@@ -1,0 +1,24 @@
+services:
+    ollama:
+        image: ollama/ollama
+        ports:
+          - "11434:11434"
+        volumes:
+          - ollama_data:/root/.ollama
+          
+    model-loader:
+        image: curlimages/curl
+        depends_on:
+        - ollama
+        command: 
+            sh -c "
+            sleep 10 &&
+            curl -X POST http://ollama:11434/api/pull -d '{\"name\":\"llama3.1:8b\"}'
+            "
+
+volumes:
+  ollama_data:
+        
+networks:
+    default:
+        name: ${RUNTIME_NETWORK}

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Recipe.Formatter.Adapters.Groq;
 using Recipe.Formatter.Adapters.Ollama;
 using Recipe.Formatter.Adapters.SchemaOrg;
 using Recipe.Formatter.Adapters.SchemaOrg.Factories;
@@ -23,11 +24,11 @@ namespace Recipe.Formatter.Host
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddTransient<IRecipeAdapter, SchemaOrgAdapter>()
-                .AddTransient<IRecipeAdapter, OllamaAdapter>();
+                .AddTransient<IRecipeAdapter, SchemaOrgAdapter>();
 
             services
                 .AddTransient<IHtmlDownloader, HtmlDownloader>()
+                .AddTransient<IHtmlCleaner, HtmlCleaner>()
                 .AddTransient<IJsonStripper, JsonStripper>()
                 .AddTransient<IJsonParser, JsonParser>();
 
@@ -37,11 +38,16 @@ namespace Recipe.Formatter.Host
                 .AddTransient<IImageFactory, ImageFactory>()
                 .AddTransient<IYieldFactory, YieldFactory>()
                 .AddTransient<ITimesFactory, TimesFactory>()
+                .AddTransient<ISchemaGenerator, SchemaGenerator>()
                 .AddTransient<IResponseFormatter, ResponseFormatter>();
 
+            /*services
+                .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>()
+                .AddTransient<IRecipeAdapter, OllamaAdapter>();*/
+
             services
-                .AddTransient<ISchemaGenerator, SchemaGenerator>()
-                .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>();
+                .AddTransient<IGroqRequestBuilder, GroqRequestBuilder>()
+                .AddTransient<IRecipeAdapter, GroqAdapter>();
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false)

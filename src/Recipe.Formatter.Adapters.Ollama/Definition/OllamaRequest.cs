@@ -11,5 +11,7 @@ namespace Recipe.Formatter.Adapters.Ollama.Definition
         [JsonPropertyName("format")] public string Format { get; set; }
 
         [JsonPropertyName("stream")] public bool Stream { get; set; }
+
+        [JsonPropertyName("options")] public OllamaRequestOptions Options { get; set; }
     }
 }

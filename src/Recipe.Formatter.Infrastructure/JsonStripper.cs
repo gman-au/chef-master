@@ -10,9 +10,10 @@ namespace Recipe.Formatter.Infrastructure
 {
     public class JsonStripper : IJsonStripper
     {
-        private const string ScriptRegexPattern = "\\<script type=\"application\\/(ld\\+json)\".*?\\<\\/script>";
+        //private const string ScriptRegexPattern = "\\<script type=\"application\\/(ld\\+json)\".*?\\<\\/script>";
+        private const string ScriptRegexPattern = @"<script\b[^>]*type\s*=\s*[""']application/ld\+json[""'][^>]*>(.*?)</script>";
         private const string JsonRegexPattern = "\\{.*\\}";
-        private const string RecipeRegexPattern = "\\\"@type\\\"[ ]?:[ ]?\\\"recipe\\\"";
+        private const string RecipeRegexPattern = "\\\"@type\\\"[ ]?:[ ]?[\\[]?\\\"recipe\\\"[\\]]?";
 
         public async Task<string> StripFromHtmlAsync(string html)
         {
