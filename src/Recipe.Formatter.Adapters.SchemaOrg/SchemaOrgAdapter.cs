@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Recipe.Formatter.Adapters.SchemaOrg.Factories;
-using Recipe.Formatter.Infrastructure;
 using Recipe.Formatter.Interfaces;
 using Recipe.Formatter.ViewModel;
 
@@ -30,7 +30,11 @@ namespace Recipe.Formatter.Adapters.SchemaOrg
             _formatter = formatter;
         }
 
-        public async Task<RecipeParseResponseViewModel> ProcessAsync(RecipeParseRequestViewModel request)
+        public int Order { get; set; } = 1;
+
+        public async Task<RecipeParseResponseViewModel> ProcessAsync(
+            RecipeParseRequestViewModel request,
+            CancellationToken cancellationToken = default)
         {
             var response = new RecipeParseResponseViewModel
             {

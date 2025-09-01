@@ -9,7 +9,4 @@
         <ProjectReference Include="..\Recipe.Formatter.ViewModel\Recipe.Formatter.ViewModel.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-    </ItemGroup>
-
 </Project>

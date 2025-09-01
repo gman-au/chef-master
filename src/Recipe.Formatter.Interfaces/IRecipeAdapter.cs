@@ -1,10 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Interfaces
 {
     public interface IRecipeAdapter
     {
-        Task<RecipeParseResponseViewModel> ProcessAsync(RecipeParseRequestViewModel request);
+        int Order { get; set; }
+
+        Task<RecipeParseResponseViewModel> ProcessAsync(
+            RecipeParseRequestViewModel request,
+            CancellationToken cancellationToken = default);
     }
 }

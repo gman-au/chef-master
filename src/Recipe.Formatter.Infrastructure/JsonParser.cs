@@ -17,7 +17,7 @@ namespace Recipe.Formatter.Infrastructure
 
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception(
                     "I found some information in the site but I was unable to interpret it. Apologies.");

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Recipe.Formatter.Adapters.Ollama;
 using Recipe.Formatter.Adapters.SchemaOrg;
 using Recipe.Formatter.Adapters.SchemaOrg.Factories;
 using Recipe.Formatter.Infrastructure;
@@ -23,6 +24,9 @@ namespace Recipe.Formatter.Host
         {
             services
                 .AddTransient<IRecipeAdapter, SchemaOrgAdapter>()
+                .AddTransient<IRecipeAdapter, OllamaAdapter>();
+
+            services
                 .AddTransient<IHtmlDownloader, HtmlDownloader>()
                 .AddTransient<IJsonStripper, JsonStripper>()
                 .AddTransient<IJsonParser, JsonParser>();
@@ -34,6 +38,10 @@ namespace Recipe.Formatter.Host
                 .AddTransient<IYieldFactory, YieldFactory>()
                 .AddTransient<ITimesFactory, TimesFactory>()
                 .AddTransient<IResponseFormatter, ResponseFormatter>();
+
+            services
+                .AddTransient<ISchemaGenerator, SchemaGenerator>()
+                .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>();
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false)

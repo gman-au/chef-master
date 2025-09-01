@@ -9,6 +9,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\Recipe.Formatter.Adapters.Ollama\Recipe.Formatter.Adapters.Ollama.csproj" />
       <ProjectReference Include="..\Recipe.Formatter.Adapters.SchemaOrg\Recipe.Formatter.Adapters.SchemaOrg.csproj" />
       <ProjectReference Include="..\Recipe.Formatter.Infrastructure\Recipe.Formatter.Infrastructure.csproj" />
     </ItemGroup>
