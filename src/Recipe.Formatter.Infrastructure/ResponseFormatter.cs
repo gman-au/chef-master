@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Recipe.Formatter.Infrastructure.Extensions;
+using Recipe.Formatter.Interfaces;
 using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Infrastructure

@@ -1,6 +1,6 @@
 ﻿using Recipe.Formatter.Infrastructure.Extensions;
 
-namespace Recipe.Formatter.Infrastructure.Factories
+namespace Recipe.Formatter.Adapters.SchemaOrg.Factories
 {
     public class YieldFactory : IYieldFactory
     {

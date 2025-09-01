@@ -2,7 +2,7 @@
 using System.Linq;
 using Schema.NET;
 
-namespace Recipe.Formatter.Infrastructure.Factories
+namespace Recipe.Formatter.Adapters.SchemaOrg.Factories
 {
     public class ImageFactory : IImageFactory
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Recipe.Formatter.Infrastructure
+namespace Recipe.Formatter.Interfaces
 {
     public interface IHtmlDownloader
     {

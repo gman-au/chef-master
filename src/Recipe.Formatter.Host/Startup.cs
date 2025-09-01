@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Recipe.Formatter.Adapters.SchemaOrg;
+using Recipe.Formatter.Adapters.SchemaOrg.Factories;
 using Recipe.Formatter.Infrastructure;
-using Recipe.Formatter.Infrastructure.Factories;
+using Recipe.Formatter.Interfaces;
 
 namespace Recipe.Formatter.Host
 {
@@ -20,7 +22,7 @@ namespace Recipe.Formatter.Host
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddTransient<IFormatterEngine, FormatterEngine>()
+                .AddTransient<IRecipeAdapter, SchemaOrgAdapter>()
                 .AddTransient<IHtmlDownloader, HtmlDownloader>()
                 .AddTransient<IJsonStripper, JsonStripper>()
                 .AddTransient<IJsonParser, JsonParser>();

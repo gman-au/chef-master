@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Recipe.Formatter.Interfaces;
 
 namespace Recipe.Formatter.Infrastructure
 {

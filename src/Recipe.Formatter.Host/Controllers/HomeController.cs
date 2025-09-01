@@ -2,17 +2,18 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.Formatter.Infrastructure;
+using Recipe.Formatter.Interfaces;
 using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Host.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IFormatterEngine _formatterEngine;
+        private readonly IRecipeAdapter _recipeAdapter;
 
-        public HomeController(IFormatterEngine formatterEngine)
+        public HomeController(IRecipeAdapter recipeAdapter)
         {
-            _formatterEngine = formatterEngine;
+            _recipeAdapter = recipeAdapter;
         }
 
         public IActionResult Index()
@@ -28,7 +29,7 @@ namespace Recipe.Formatter.Host.Controllers
 
             try
             {
-                var response = await _formatterEngine.ProcessAsync(value);
+                var response = await _recipeAdapter.ProcessAsync(value);
 
                 if (response.Success)
                 {

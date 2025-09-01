@@ -1,4 +1,4 @@
-﻿namespace Recipe.Formatter.Infrastructure.Factories
+﻿namespace Recipe.Formatter.Adapters.SchemaOrg.Factories
 {
     public interface IImageFactory
     {

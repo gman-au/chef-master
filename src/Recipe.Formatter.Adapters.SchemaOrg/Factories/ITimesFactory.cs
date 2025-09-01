@@ -1,6 +1,6 @@
 ﻿using Recipe.Formatter.ViewModel;
 
-namespace Recipe.Formatter.Infrastructure.Factories
+namespace Recipe.Formatter.Adapters.SchemaOrg.Factories
 {
     public interface ITimesFactory
     {

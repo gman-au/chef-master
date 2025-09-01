@@ -2,7 +2,7 @@
 using System.Linq;
 using Schema.NET;
 
-namespace Recipe.Formatter.Infrastructure.Factories
+namespace Recipe.Formatter.Adapters.SchemaOrg.Factories
 {
     public class InstructionsFactory : IInstructionsFactory
     {
@@ -26,7 +26,7 @@ namespace Recipe.Formatter.Infrastructure.Factories
             if (strings.Any())
                 return strings;
 
-            return new string[] { };
+            return [];
         }
     }
 }

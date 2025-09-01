@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Recipe.Formatter.Infrastructure.Factories;
+using Recipe.Formatter.Adapters.SchemaOrg.Factories;
+using Recipe.Formatter.Infrastructure;
+using Recipe.Formatter.Interfaces;
 using Recipe.Formatter.ViewModel;
 
-namespace Recipe.Formatter.Infrastructure
+namespace Recipe.Formatter.Adapters.SchemaOrg
 {
-    public class FormatterEngine : IFormatterEngine
+    public class SchemaOrgAdapter : IRecipeAdapter
     {
         private readonly IResponseFormatter _formatter;
         private readonly IHtmlDownloader _htmlDownloader;
@@ -13,7 +15,7 @@ namespace Recipe.Formatter.Infrastructure
         private readonly IJsonStripper _jsonStripper;
         private readonly IResponseFactory _responseFactory;
 
-        public FormatterEngine(
+        public SchemaOrgAdapter(
             IHtmlDownloader htmlDownloader,
             IJsonStripper jsonStripper,
             IJsonParser jsonParser,
@@ -49,19 +51,37 @@ namespace Recipe.Formatter.Infrastructure
 
             try
             {
-                var html = await _htmlDownloader.DownloadAsync(request.Url);
+                var html =
+                    await
+                        _htmlDownloader
+                            .DownloadAsync(request.Url);
+
                 response.Status.Stages.CanConnect = true;
 
-                var json = await _jsonStripper.StripFromHtmlAsync(html);
+                var json =
+                    await
+                        _jsonStripper
+                            .StripFromHtmlAsync(html);
+
                 response.Status.Stages.CanFind = true;
 
-                var thing = await _jsonParser.ParseAsync(json);
+                var thing =
+                    await
+                        _jsonParser
+                            .ParseAsync(json);
+
                 response.Status.Stages.CanInterpret = true;
 
-                response.Recipe = await _responseFactory.ForAsync(thing);
+                response.Recipe =
+                    await
+                        _responseFactory
+                            .ForAsync(thing);
+
                 response.Status.Stages.CanConvert = true;
 
-                response = _formatter.For(response, request.CustomImageUrl);
+                response =
+                    _formatter
+                        .For(response, request.CustomImageUrl);
 
                 response.Success = true;
             }

@@ -1,6 +1,6 @@
 ﻿using Recipe.Formatter.ViewModel;
 
-namespace Recipe.Formatter.Infrastructure
+namespace Recipe.Formatter.Interfaces
 {
     public interface IResponseFormatter
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Recipe.Formatter.Interfaces;
 using Schema.NET;
 
 namespace Recipe.Formatter.Infrastructure

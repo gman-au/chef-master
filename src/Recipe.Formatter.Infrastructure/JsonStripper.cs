@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Recipe.Formatter.Infrastructure.Extensions;
+using Recipe.Formatter.Interfaces;
 
 namespace Recipe.Formatter.Infrastructure
 {
@@ -46,7 +47,6 @@ namespace Recipe.Formatter.Infrastructure
                                     .Sanitise()
                                     .GetBackwardNestingOccurrence(recipeMatch.Index, '{', '}');
 
-                            // .GetPrecedingOccurrence(recipeMatch.Index, '{');
                             if (openIndex.HasValue)
                             {
                                 var closeIndex = jsonString.GetForwardNestingOccurrence(openIndex.Value, '{', '}');

@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Recipe.Formatter.Interfaces\Recipe.Formatter.Interfaces.csproj" />
-        <ProjectReference Include="..\Recipe.Formatter.ViewModel\Recipe.Formatter.ViewModel.csproj"/>
+      <ProjectReference Include="..\Recipe.Formatter.ViewModel\Recipe.Formatter.ViewModel.csproj" />
     </ItemGroup>
-
+    
     <ItemGroup>
+        <PackageReference Include="Schema.NET" Version="13.0.0"/>
     </ItemGroup>
 
 </Project>
