@@ -31,7 +31,9 @@ namespace Recipe.Formatter.Adapters.SchemaOrg
             _formatter = formatter;
         }
 
-        public int Order { get; set; } = 1;
+        public int Index { get; set; } = 1;
+
+        public string ConfirmPrompt { get; set; } = null;
 
         public async Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,

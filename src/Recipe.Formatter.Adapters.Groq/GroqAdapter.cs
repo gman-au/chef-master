@@ -41,7 +41,9 @@ namespace Recipe.Formatter.Adapters.Groq
             _formatter = formatter;
         }
 
-        public int Order { get; set; } = 2;
+        public int Index { get; set; } = 2;
+
+        public string ConfirmPrompt { get; set; } = "Would you like to use an AI (Groq) to attempt to interpret the recipe?";
 
         public async Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,

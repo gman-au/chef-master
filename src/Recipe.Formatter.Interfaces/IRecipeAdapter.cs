@@ -6,7 +6,9 @@ namespace Recipe.Formatter.Interfaces
 {
     public interface IRecipeAdapter
     {
-        int Order { get; set; }
+        int Index { get; set; }
+
+        string ConfirmPrompt { get; set; }
 
         Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,

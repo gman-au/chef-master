@@ -34,7 +34,9 @@ namespace Recipe.Formatter.Adapters.Ollama
             _htmlCleaner = htmlCleaner;
         }
 
-        public int Order { get; set; } = 2;
+        public int Index { get; set; } = 3;
+
+        public string ConfirmPrompt { get; set; } = "Would you like a Large Language Model (LLM) to attempt to interpret the recipe?";
 
         public async Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,

@@ -41,9 +41,9 @@ namespace Recipe.Formatter.Host
                 .AddTransient<ISchemaGenerator, SchemaGenerator>()
                 .AddTransient<IResponseFormatter, ResponseFormatter>();
 
-            /*services
+            services
                 .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>()
-                .AddTransient<IRecipeAdapter, OllamaAdapter>();*/
+                .AddTransient<IRecipeAdapter, OllamaAdapter>();
 
             services
                 .AddTransient<IGroqRequestBuilder, GroqRequestBuilder>()

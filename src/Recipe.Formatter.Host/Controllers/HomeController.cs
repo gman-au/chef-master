@@ -24,19 +24,48 @@ namespace Recipe.Formatter.Host.Controllers
             try
             {
                 var response = new RecipeParseResponseViewModel();
-                
-                foreach (var recipeAdapter in recipeAdapters.OrderBy(o => o.Order))
+
+                var lastModelIndex = 0;
+
+                var allApplicableAdapters =
+                    recipeAdapters
+                        .Where(o => o.Index > (value.LastModelIndex ?? -1))
+                        .OrderBy(o => o.Index);
+
+                foreach (var recipeAdapter in allApplicableAdapters)
                 {
+                    lastModelIndex = recipeAdapter.Index;
+
                     response =
                         await
                             recipeAdapter
                                 .ProcessAsync(value);
 
-                    if (!response.Success) continue;
+                    if (response.Success)
+                    {
+                        ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
 
-                    ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
+                        return View(view, response);
+                    }
 
-                    return View(view, response);
+                    // If next adapter message isn't empty, round trip back to user for confirmation
+                    var nextAdapter =
+                        recipeAdapters
+                            .OrderBy(o => o.Index)
+                            .FirstOrDefault(o => o.Index > lastModelIndex);
+
+                    if (nextAdapter == null) continue;
+
+                    var confirmationMessage =
+                        nextAdapter?.ConfirmPrompt;
+
+                    if (string.IsNullOrWhiteSpace(confirmationMessage)) continue;
+
+                    response.Status.LastModelIndex = lastModelIndex;
+                    response.Status.CustomImageUrl = value.CustomImageUrl;
+                    response.Status.ConfirmationMessage = confirmationMessage;
+
+                    return View("Index", response.Status);
                 }
 
                 return View("Index", response.Status);
