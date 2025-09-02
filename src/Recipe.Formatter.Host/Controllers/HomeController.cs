@@ -15,6 +15,11 @@ namespace Recipe.Formatter.Host.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Reset()
+        {
+            return View("Index", null);
+        }
+
         public async Task<IActionResult> Process(RecipeParseRequestViewModel value)
         {
             var view = value.Style ?? "Basic";
@@ -29,12 +34,12 @@ namespace Recipe.Formatter.Host.Controllers
 
                 var allApplicableAdapters =
                     recipeAdapters
-                        .Where(o => o.Index > (value.LastModelIndex ?? -1))
-                        .OrderBy(o => o.Index);
+                        .Where(o => o.Metadata.Index > (value.LastModelIndex ?? -1))
+                        .OrderBy(o => o.Metadata.Index);
 
                 foreach (var recipeAdapter in allApplicableAdapters)
                 {
-                    lastModelIndex = recipeAdapter.Index;
+                    lastModelIndex = recipeAdapter.Metadata.Index;
 
                     response =
                         await
@@ -51,13 +56,13 @@ namespace Recipe.Formatter.Host.Controllers
                     // If next adapter message isn't empty, round trip back to user for confirmation
                     var nextAdapter =
                         recipeAdapters
-                            .OrderBy(o => o.Index)
-                            .FirstOrDefault(o => o.Index > lastModelIndex);
+                            .OrderBy(o => o.Metadata.Index)
+                            .FirstOrDefault(o => o.Metadata.Index > lastModelIndex);
 
                     if (nextAdapter == null) continue;
 
                     var confirmationMessage =
-                        nextAdapter?.ConfirmPrompt;
+                        nextAdapter?.Metadata?.ConfirmPrompt;
 
                     if (string.IsNullOrWhiteSpace(confirmationMessage)) continue;
 
@@ -72,7 +77,7 @@ namespace Recipe.Formatter.Host.Controllers
             }
             catch (Exception ex)
             {
-                return View("Index", new StatusViewModel {Message = status ?? ex.Message, Url = value.Url});
+                return View("Index", new StatusViewModel { Message = status ?? ex.Message, Url = value.Url });
             }
         }
     }

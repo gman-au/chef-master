@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Html
 @using Microsoft.Extensions.Options
+@using Recipe.Formatter.Interfaces
 @model Recipe.Formatter.ViewModel.StatusViewModel;
 @inject IOptions<MyBuildConfiguration> MyBuildConfiguration
+@inject IEnumerable<IRecipeAdapter> Adapters
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -121,11 +123,51 @@
                 </div>
             }
 
-            <footer>
-                <hr/>
-                <p style="color: grey; font-size: 8pt; text-align: right">
-                    <i>Build @MyBuildConfiguration.Value.MyBuildNumber</i>
-                </p>
+            <div class="row justify-content-sm-center" style="padding-top: 10px;">
+                <div class="col-sm-5">&nbsp;</div>
+                <div class="col-sm-2">
+                    @Html.ActionLink(
+                        "Start over",
+                        "Reset",
+                        "Home",
+                        null,
+                        new { @class = "btn btn-block btn-default" }
+                        )
+                </div>
+                <div class="col-sm-5">&nbsp;</div>
+            </div>
+            <div class="line-break"/>
+            <footer style="padding-top: 20px;">
+                <div class="row align-items-start justify-content-center">
+                    <div class="col-sm-3">&nbsp;</div>
+                    <div class="col-sm-3">
+                        <p class="text-secondary">
+                            <small>Registered adapters:</small>
+                        </p>
+                        <ul>
+                            @foreach (var adapter in Adapters)
+                            {
+                                <li>
+                                    <small>
+                                        <a href="@adapter.Metadata.Url" target="_blank">
+                                            @adapter.Metadata.Name
+                                        </a>
+                                    </small>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">&nbsp;
+                        <p class="text-info" style="text-align: right">
+                            <i>
+                                <small>
+                                    Build @MyBuildConfiguration.Value.MyBuildNumber
+                                </small>
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-sm-3">&nbsp;</div>
+                </div>
             </footer>
         }
     </div>

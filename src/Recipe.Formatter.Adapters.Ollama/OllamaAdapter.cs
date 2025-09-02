@@ -34,9 +34,14 @@ namespace Recipe.Formatter.Adapters.Ollama
             _htmlCleaner = htmlCleaner;
         }
 
-        public int Index { get; set; } = 3;
-
-        public string ConfirmPrompt { get; set; } = "Would you like a Large Language Model (LLM) to attempt to interpret the recipe?";
+        public AdapterMetadataViewModel Metadata { get; set; } = new()
+        {
+            Name = "Ollama",
+            Url = "https://ollama.ai/",
+            Ai = true,
+            Index = 3,
+            ConfirmPrompt = "Would you like a Large Language Model (LLM) to attempt to interpret the recipe?"
+        };
 
         public async Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,

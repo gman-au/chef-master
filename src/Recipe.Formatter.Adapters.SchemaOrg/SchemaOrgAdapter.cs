@@ -31,9 +31,14 @@ namespace Recipe.Formatter.Adapters.SchemaOrg
             _formatter = formatter;
         }
 
-        public int Index { get; set; } = 1;
-
-        public string ConfirmPrompt { get; set; } = null;
+        public AdapterMetadataViewModel Metadata { get; set; } = new()
+        {
+            Name = "Schema.org",
+            Url = "https://schema.org/",
+            Ai = false,
+            Index = 1,
+            ConfirmPrompt = null
+        };
 
         public async Task<RecipeParseResponseViewModel> ProcessAsync(
             RecipeParseRequestViewModel request,
