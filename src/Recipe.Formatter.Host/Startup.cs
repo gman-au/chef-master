@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,9 @@ namespace Recipe.Formatter.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var ollamaEndpoint = Environment.GetEnvironmentVariable("OLLAMA_ENDPOINT");
+            var groqEndpoint = Environment.GetEnvironmentVariable("GROQ_ENDPOINT");
+
             services
                 .AddTransient<IRecipeAdapter, SchemaOrgAdapter>();
 
@@ -41,13 +45,19 @@ namespace Recipe.Formatter.Host
                 .AddTransient<ISchemaGenerator, SchemaGenerator>()
                 .AddTransient<IResponseFormatter, ResponseFormatter>();
 
-            /*services
-                .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>()
-                .AddTransient<IRecipeAdapter, OllamaAdapter>();*/
+            if (!string.IsNullOrEmpty(ollamaEndpoint))
+            {
+                services
+                    .AddTransient<IOllamaRequestBuilder, OllamaRequestBuilder>()
+                    .AddTransient<IRecipeAdapter, OllamaAdapter>();
+            }
 
-            services
-                .AddTransient<IGroqRequestBuilder, GroqRequestBuilder>()
-                .AddTransient<IRecipeAdapter, GroqAdapter>();
+            if (!string.IsNullOrEmpty(groqEndpoint))
+            {
+                services
+                    .AddTransient<IGroqRequestBuilder, GroqRequestBuilder>()
+                    .AddTransient<IRecipeAdapter, GroqAdapter>();
+            }
 
             services
                 .AddMvc(options => options.EnableEndpointRouting = false)

@@ -9,5 +9,9 @@
         public string CustomImageUrl { get; set; }
 
         public StagesViewModel Stages { get; set; }
+
+        public string ConfirmationMessage { get; set; }
+
+        public int? LastModelIndex { get; set; }
     }
 }

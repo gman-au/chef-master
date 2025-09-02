@@ -15,6 +15,11 @@ namespace Recipe.Formatter.Host.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Reset()
+        {
+            return View("Index", null);
+        }
+
         public async Task<IActionResult> Process(RecipeParseRequestViewModel value)
         {
             var view = value.Style ?? "Basic";
@@ -24,26 +29,55 @@ namespace Recipe.Formatter.Host.Controllers
             try
             {
                 var response = new RecipeParseResponseViewModel();
-                
-                foreach (var recipeAdapter in recipeAdapters.OrderBy(o => o.Order))
+
+                var lastModelIndex = 0;
+
+                var allApplicableAdapters =
+                    recipeAdapters
+                        .Where(o => o.Metadata.Index > (value.LastModelIndex ?? -1))
+                        .OrderBy(o => o.Metadata.Index);
+
+                foreach (var recipeAdapter in allApplicableAdapters)
                 {
+                    lastModelIndex = recipeAdapter.Metadata.Index;
+
                     response =
                         await
                             recipeAdapter
                                 .ProcessAsync(value);
 
-                    if (!response.Success) continue;
+                    if (response.Success)
+                    {
+                        ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
 
-                    ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
+                        return View(view, response);
+                    }
 
-                    return View(view, response);
+                    // If next adapter message isn't empty, round trip back to user for confirmation
+                    var nextAdapter =
+                        recipeAdapters
+                            .OrderBy(o => o.Metadata.Index)
+                            .FirstOrDefault(o => o.Metadata.Index > lastModelIndex);
+
+                    if (nextAdapter == null) continue;
+
+                    var confirmationMessage =
+                        nextAdapter?.Metadata?.ConfirmPrompt;
+
+                    if (string.IsNullOrWhiteSpace(confirmationMessage)) continue;
+
+                    response.Status.LastModelIndex = lastModelIndex;
+                    response.Status.CustomImageUrl = value.CustomImageUrl;
+                    response.Status.ConfirmationMessage = confirmationMessage;
+
+                    return View("Index", response.Status);
                 }
 
                 return View("Index", response.Status);
             }
             catch (Exception ex)
             {
-                return View("Index", new StatusViewModel {Message = status ?? ex.Message, Url = value.Url});
+                return View("Index", new StatusViewModel { Message = status ?? ex.Message, Url = value.Url });
             }
         }
     }

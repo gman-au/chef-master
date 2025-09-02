@@ -15,8 +15,7 @@
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5014",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "OLLAMA_ENDPOINT": "http://localhost:11434"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "https": {

@@ -36,6 +36,14 @@
 }
 
 .rounded-form {
+    text-align: center;
+    margin: 20px;
     border-radius: 10px;
     padding: 20px;
+    border: 2px solid #5cb85c;
+}
+
+.line-break {
+    margin-top: 20px;
+    border-top: 1px dashed lightgray;
 }

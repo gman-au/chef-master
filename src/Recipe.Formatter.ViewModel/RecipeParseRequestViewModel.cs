@@ -7,5 +7,7 @@
         public string CustomImageUrl { get; set; }
 
         public string Style { get; set; }
+
+        public int? LastModelIndex { get; set; }
     }
 }
