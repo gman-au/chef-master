@@ -20,6 +20,12 @@
     }
 }
 
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+>
 <link rel="stylesheet" href="~/css/index.css"/>
 <br/>
 <div class="container">
@@ -27,64 +33,63 @@
         @using (Html.BeginForm("Process", "Home", FormMethod.Post))
         {
             <div class="row">
-                <div class="col-md-12 centered">
+                <div class="col-lg-12 centered">
                     <h2>Recipe Formatter</h2>
                 </div>
             </div>
             <div class="row justify-content-sm-center">
-                <div class="col-sm-2">&nbsp;</div>
-                <div class="col-sm-8">
+                <div class="col-lg-2">&nbsp;</div>
+                <div class="col-lg-8">
                     <input type="text" class="form-control" name="url" value="@Model?.Url">
                     <small class="form-text text-muted">Put a web site link here and I will try to get the recipe from it.</small>
                     <input type="text" class="form-control" name="customImageUrl" value="@Model?.CustomImageUrl">
                     <small class="form-text text-muted">Custom image URL (if required).</small>
                 </div>
-                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-lg-2">&nbsp;</div>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row justify-content-sm-center">
-                <div class="col-xs-2">&nbsp;</div>
-                <div class="col-xs-8">
-                    <div class="radio1" style="display: inline; white-space: nowrap;">
-                        <div style="padding-bottom:10px;">
-                            <div class="row justify-content-sm-center">
-                                <div class="col-xs-6">
-                                    <img src="~/img/modern.PNG" class="style-preview"/>
-                                    <input type="hidden" name="lastmodelindex" value="@Model?.LastModelIndex"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="radio">
-                                        @Html.RadioButton("style", "Modern", true)
-                                        @Html.Label("style", "Modern")
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="padding-bottom:10px;">
-                            <div class="row justify-content-sm-center">
-                                <div class="col-xs-6">
-                                    <img src="~/img/womens-weekly.PNG" class="style-preview"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="radio">
-                                        @Html.RadioButton("style", "WomensWeekly")
-                                        @Html.Label("style", "Women's Weekly")
-                                    </div>
-                                </div>
-                            </div>
+            <input type="hidden" name="lastmodelindex" value="@Model?.LastModelIndex"/>
+            <div class="row justify-content-evenly">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4 col-md-12" align="center">
+                    <div class="card" style="width: 18rem">
+                        <img class="card-img-top" src="~/img/modern.PNG"/>
+                        <div class="card-body">
+                            @Html.RadioButton("style", "Modern", true)
+                            @Html.Label("style", "Modern")
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2">&nbsp;</div>
+                <div class="col-lg-4 col-md-12" align="center">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="~/img/womens-weekly.PNG"/>
+                        <div class="card-body">
+                            @Html.RadioButton("style", "WomensWeekly", false)
+                            @Html.Label("style", "Women's Weekly")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
             </div>
             @if (Model != null)
             {
                 @if (!string.IsNullOrEmpty(Model.ConfirmationMessage))
                 {
                     <div class="rounded-form">
-                        <h6 class="text-danger">@Model.Message</h6>
-                        <h4 class="text-info">@Model.ConfirmationMessage</h4>
-                        <input class="btn btn-info" type="submit" value="Retry">
+                        <div class="row">
+                            <div class="col-sm-12">&nbsp;
+                                <h6 class="text-danger">@Model.Message</h6>
+                                <h4 class="text-info">@Model.ConfirmationMessage</h4>
+                            </div>
+                        </div>
+                        <div class="row"></div>&nbsp;
+                        <div class="row">
+                            <div class="col-sm-5">&nbsp;</div>
+                            <div class="col-sm-2">
+                                <input class="btn btn-block btn-success" type="submit" value="Retry">
+                            </div>
+                            <div class="col-sm-5">&nbsp;</div>
+                        </div>
                     </div>
                 }
                 else
@@ -115,26 +120,26 @@
             {
                 <div class="row">&nbsp;</div>
                 <div class="row justify-content-sm-center">
-                    <div class="col-sm-5">&nbsp;</div>
-                    <div class="col-sm-2">
-                        <input class="btn btn-block btn-success" type="submit" value="GO">
+                    <div class="col-lg-5">&nbsp;</div>
+                    <div class="col-lg-2 col-md-12">
+                        <input class="btn btn-block btn-outline-success" type="submit" value="Go">
                     </div>
-                    <div class="col-sm-5">&nbsp;</div>
+                    <div class="col-lg-5">&nbsp;</div>
                 </div>
             }
 
             <div class="row justify-content-sm-center" style="padding-top: 10px;">
-                <div class="col-sm-5">&nbsp;</div>
-                <div class="col-sm-2">
+                <div class="col-lg-5">&nbsp;</div>
+                <div class="col-lg-2 col-md-12">
                     @Html.ActionLink(
                         "Start over",
                         "Reset",
                         "Home",
                         null,
-                        new { @class = "btn btn-block btn-default" }
-                        )
+                        new { @class = "btn btn-block btn-outline-info" }
+                    )
                 </div>
-                <div class="col-sm-5">&nbsp;</div>
+                <div class="col-lg-5">&nbsp;</div>
             </div>
             <div class="line-break"/>
             <footer style="padding-top: 20px;">
@@ -149,7 +154,7 @@
                             {
                                 <li>
                                     <small>
-                                        <a href="@adapter.Metadata.Url" target="_blank">
+                                        <a class="text-info" href="@adapter.Metadata.Url" target="_blank">
                                             @adapter.Metadata.Name
                                         </a>
                                     </small>
