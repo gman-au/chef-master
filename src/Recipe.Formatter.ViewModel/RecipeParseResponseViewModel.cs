@@ -7,5 +7,7 @@
         public RecipeViewModel Recipe { get; set; }
 
         public StatusViewModel Status { get; set; }
+
+        public string QrCodeBase64 { get; set; }
     }
 }

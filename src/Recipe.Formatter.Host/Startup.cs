@@ -43,6 +43,8 @@ namespace Recipe.Formatter.Host
                 .AddTransient<IYieldFactory, YieldFactory>()
                 .AddTransient<ITimesFactory, TimesFactory>()
                 .AddTransient<ISchemaGenerator, SchemaGenerator>()
+                .AddTransient<IQrCodeGenerator, QrCodeGenerator>()
+                .AddTransient<ITodoistActionGenerator, TodoistActionGenerator>()
                 .AddTransient<IResponseFormatter, ResponseFormatter>();
 
             if (!string.IsNullOrEmpty(ollamaEndpoint))

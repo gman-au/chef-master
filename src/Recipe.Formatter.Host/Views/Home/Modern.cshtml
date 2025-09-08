@@ -16,6 +16,16 @@
       asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
 <link rel="stylesheet" href="~/css/modern.css" />
 
+@if (!string.IsNullOrEmpty(Model.QrCodeBase64))
+{
+    <div class="qr-code-container">
+        <img class="white-pixel" src="~/img/white_pixel.png"/>
+        <img class="qr-code" src="@Model.QrCodeBase64"/>
+        <br/>
+        <img class="todoist-logo" src="~/img/todoist-logo.webp"/>
+    </div>
+}
+
 <div class="background">
     <img class="foodImage" src="@Model.Recipe?.ImageUrl" />
     <div class="title">

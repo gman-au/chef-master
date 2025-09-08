@@ -5,13 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Recipe.Formatter.Interfaces\Recipe.Formatter.Interfaces.csproj" />
+        <ProjectReference Include="..\Recipe.Formatter.Interfaces\Recipe.Formatter.Interfaces.csproj"/>
         <ProjectReference Include="..\Recipe.Formatter.ViewModel\Recipe.Formatter.ViewModel.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="HtmlAgilityPack" Version="1.12.2" />
-      <PackageReference Include="Pomelo.JsonObject" Version="2.2.1" />
+        <PackageReference Include="HtmlAgilityPack" Version="1.12.2"/>
+        <PackageReference Include="Pomelo.JsonObject" Version="2.2.1"/>
+        <PackageReference Include="QRCoder" Version="1.6.0"/>
     </ItemGroup>
 
 </Project>

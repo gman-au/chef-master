@@ -8,7 +8,11 @@ using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Host.Controllers
 {
-    public class HomeController(IEnumerable<IRecipeAdapter> recipeAdapters) : Controller
+    public class HomeController(
+        IQrCodeGenerator qrCodeGenerator,
+        ITodoistActionGenerator todoistActionGenerator,
+        IEnumerable<IRecipeAdapter> recipeAdapters
+        ) : Controller
     {
         public IActionResult Index()
         {
@@ -49,6 +53,20 @@ namespace Recipe.Formatter.Host.Controllers
                     if (response.Success)
                     {
                         ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
+
+                        // apply QR code
+                        var todoistActionValue =
+                            todoistActionGenerator.Generate(
+                                response?.Recipe?.Title,
+                                response?.Recipe?.Ingredients ?? []);
+
+                        var qrCode =
+                            await
+                                qrCodeGenerator
+                                    .GenerateAsync(todoistActionValue);
+
+                        if (!string.IsNullOrEmpty(qrCode))
+                            response.QrCodeBase64 = $"data:image/png;base64,{qrCode}";
 
                         return View(view, response);
                     }
