@@ -17,15 +17,16 @@ ul {
 }
 
 .col {
-    display: table-cell; 
+    display: table-cell;
 }
 
 .col-container {
     display: table;
-    width: 100%; 
+    width: 100%;
 }
 
 .foodImage {
+    z-index: 900;
     height: 200px;
     object-fit: cover;
     width: 100%;
@@ -76,4 +77,36 @@ ul {
     position: absolute;
     text-align: center;
     width: 100%;
+}
+
+.qr-code-container {
+    top: 10px;
+    right: 10px;
+    max-width: 95px;
+    position: absolute;
+    border: 3px solid black;
+    background-color: white;
+    z-index: 999;
+}
+
+.qr-code {
+    height: 80px;
+    z-index: 999;
+}
+
+.white-pixel {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.todoist-logo {
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: white;
+    z-index: 999;
 }

@@ -26,6 +26,7 @@ namespace Recipe.Formatter.Host
         {
             var ollamaEndpoint = Environment.GetEnvironmentVariable("OLLAMA_ENDPOINT");
             var groqEndpoint = Environment.GetEnvironmentVariable("GROQ_ENDPOINT");
+            var qristEndpoint = Environment.GetEnvironmentVariable("QRIST_ENDPOINT");
 
             services
                 .AddTransient<IRecipeAdapter, SchemaOrgAdapter>();
@@ -57,6 +58,12 @@ namespace Recipe.Formatter.Host
                 services
                     .AddTransient<IGroqRequestBuilder, GroqRequestBuilder>()
                     .AddTransient<IRecipeAdapter, GroqAdapter>();
+            }
+
+            if (!string.IsNullOrEmpty(qristEndpoint))
+            {
+                services
+                    .AddTransient<IQristAdapter, QristAdapter>();
             }
 
             services

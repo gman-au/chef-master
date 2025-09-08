@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.Formatter.Interfaces;
@@ -8,7 +9,10 @@ using Recipe.Formatter.ViewModel;
 
 namespace Recipe.Formatter.Host.Controllers
 {
-    public class HomeController(IEnumerable<IRecipeAdapter> recipeAdapters) : Controller
+    public class HomeController(
+        IEnumerable<IRecipeAdapter> recipeAdapters,
+        IQristAdapter qristAdapter = null
+        ) : Controller
     {
         public IActionResult Index()
         {
@@ -49,6 +53,21 @@ namespace Recipe.Formatter.Host.Controllers
                     if (response.Success)
                     {
                         ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
+
+                        // apply QR code
+                        if (qristAdapter != null)
+                        {
+                            var qrCode =
+                                await
+                                    qristAdapter
+                                        .GenerateQristCodeAsync(
+                                            response?.Recipe?.Title,
+                                            response?.Recipe?.Ingredients ?? [],
+                                            CancellationToken.None
+                                        );
+
+                            response.QrCodeBase64 = $"data:image/png;base64,{qrCode}";
+                        }
 
                         return View(view, response);
                     }
