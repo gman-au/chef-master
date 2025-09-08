@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.Formatter.Interfaces;
@@ -9,9 +10,8 @@ using Recipe.Formatter.ViewModel;
 namespace Recipe.Formatter.Host.Controllers
 {
     public class HomeController(
-        IQrCodeGenerator qrCodeGenerator,
-        ITodoistActionGenerator todoistActionGenerator,
-        IEnumerable<IRecipeAdapter> recipeAdapters
+        IEnumerable<IRecipeAdapter> recipeAdapters,
+        IQristAdapter qristAdapter = null
         ) : Controller
     {
         public IActionResult Index()
@@ -55,18 +55,19 @@ namespace Recipe.Formatter.Host.Controllers
                         ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
 
                         // apply QR code
-                        var todoistActionValue =
-                            todoistActionGenerator.Generate(
-                                response?.Recipe?.Title,
-                                response?.Recipe?.Ingredients ?? []);
+                        if (qristAdapter != null)
+                        {
+                            var qrCode =
+                                await
+                                    qristAdapter
+                                        .GenerateQristCodeAsync(
+                                            response?.Recipe?.Title,
+                                            response?.Recipe?.Ingredients ?? [],
+                                            CancellationToken.None
+                                        );
 
-                        var qrCode =
-                            await
-                                qrCodeGenerator
-                                    .GenerateAsync(todoistActionValue);
-
-                        if (!string.IsNullOrEmpty(qrCode))
                             response.QrCodeBase64 = $"data:image/png;base64,{qrCode}";
+                        }
 
                         return View(view, response);
                     }
