@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Html
+@model Chef.Master.ViewModel.RecipeParseResponseViewModel;
+@{
+    ViewBag.Title = @Model.Recipe?.Title;
+}
+
+@{
+    Func<dynamic, IHtmlContent> SeparatorWidget()
+    {
+        return (@<div class="separator-widget">&nbsp;</div>);
+    }
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+<link rel="stylesheet" href="~/css/modern.css" />
+
+@if (!string.IsNullOrEmpty(Model.QrCodeBase64))
+{
+    <div class="qr-code-container">
+        <img class="white-pixel" src="~/img/white_pixel.png"/>
+        <img class="qr-code" src="@Model.QrCodeBase64"/>
+        <br/>
+        <img class="todoist-logo" src="~/img/todoist-logo.webp"/>
+    </div>
+}
+
+<div class="background">
+    <img class="foodImage" src="@Model.Recipe?.ImageUrl" />
+    <div class="title">
+        @Model.Recipe?.Title
+        <div class="subtitle">
+            @if (!string.IsNullOrEmpty(Model.Recipe?.Yield))
+            {
+                @Model.Recipe.Yield
+                @SeparatorWidget()(null)
+            }
+            @if (!string.IsNullOrEmpty(Model.Recipe?.Times?.PreparationMinutes))
+            {
+                <span>Prep</span>
+                @Model.Recipe?.Times?.PreparationMinutes
+                @SeparatorWidget()(null)
+            }
+            @if (!string.IsNullOrEmpty(Model.Recipe?.Times?.CookingMinutes))
+            {
+                <span>Cook</span>
+                @Model.Recipe?.Times?.CookingMinutes
+                @SeparatorWidget()(null)
+            }
+            @if (!string.IsNullOrEmpty(Model.Recipe?.Times?.TotalMinutes))
+            {
+                <span>Total</span>
+                @Model.Recipe?.Times?.TotalMinutes
+            }
+        </div>
+    </div>
+</div>
+
+<div class="col-container">
+    <div class="col">
+        <div class="print ingredients">
+            <h3 class="sectionTitle">Ingredients</h3>
+            <ul>
+                @foreach (var ingredient in Model.Recipe?.Ingredients ?? new List<string>())
+                {
+                    <li>@ingredient</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="print instructions">
+            <h3 class="sectionTitle">Method</h3>
+            <ul>
+                @foreach (var instruction in Model.Recipe?.Instructions ?? new List<string>())
+                {
+                    <li>@instruction</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
