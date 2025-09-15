@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   
 env:
-  REGISTRY: ghcr.io/gman-au/recipe-formatter
-  IMAGE_NAME: recipe-formatter
+  REGISTRY: ghcr.io/gman-au/chef-master
+  IMAGE_NAME: chef-master
   
 jobs:
   build-and-push-image:
@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build image
-        run: docker build --file ./src/Recipe.Formatter.Host/Dockerfile --tag built-image ./src
+        run: docker build --file ./src/Chef.Master.Host/Dockerfile --tag built-image ./src
 
       - name: Push image
         run: |

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Chef.Master.ViewModel\Chef.Master.ViewModel.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Schema.NET" Version="13.0.0"/>
+    </ItemGroup>
+
+</Project>

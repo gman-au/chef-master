@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Chef.Master.Interfaces\Chef.Master.Interfaces.csproj" />
+        <ProjectReference Include="..\Chef.Master.ViewModel\Chef.Master.ViewModel.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="HtmlAgilityPack" Version="1.12.2"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Pomelo.JsonObject" Version="2.2.1"/>
+        <PackageReference Include="QRCoder" Version="1.6.0"/>
+    </ItemGroup>
+
+</Project>
