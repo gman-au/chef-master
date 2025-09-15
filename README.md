@@ -1,5 +1,11 @@
 # chef-master
 
+<p align="center">    
+    <img width="300" alt="chef-master-logo" src="https://github.com/user-attachments/assets/088e35fb-eeb2-47d1-b8a0-32a226b4c75e" />
+</p>
+
+![GitHub Release](https://img.shields.io/github/v/release/gman-au/chef-master)
+
 ## Summary
 This repository hosts a very simple web site that performs the following:
 
@@ -9,7 +15,7 @@ This repository hosts a very simple web site that performs the following:
 
 Many recipe sites include schema.org compatible JSON data for [search engine optimisation](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data), but include an excessive amount of verbiage that is printer-unfriendly.
 
-This web host will attempt to automatically distill the verbosity out of the page and leave you with just the basic recipe information.
+This web host will attempt to automatically distil the verbosity out of the page and leave you with just the basic recipe information.
 
 ## Installation / usage
 If you use Docker or similar container management, you can simply [pull and run the latest package](https://github.com/orgs/gman-au/packages?repo_name=chef-master). 
@@ -20,6 +26,8 @@ If you use Docker or similar container management, you can simply [pull and run 
 
 If the host, for whatever reason, cannot find any recipe information from the site, you can configure a [Groq account](https://console.groq.com/home) to be used as an adapter.
 
+<img width="1091" height="215" alt="image" src="https://github.com/user-attachments/assets/3eb04a11-58ab-4e36-b50a-b8bde4831dac" />
+
 When confirmed, the host will prompt Groq to perform a pass at the site, and see if it can extract similarly-structured recipe data.
 
 To enable this adapter, simply provide the following environment variables on startup (either in .NET environment or Docker `-e` option):
@@ -28,7 +36,7 @@ To enable this adapter, simply provide the following environment variables on st
 | `GROQ_ENDPOINT` | The Groq endpoint, this will be `https://api.groq.com` |
 | `GROQ_API_KEY` | Your own (personal) Groq API key
 
-> [!NOTE]
+> [!WARNING]
 > Each 'attempt' at doing this will incur a cost on your Groq account.
 
 
@@ -46,6 +54,7 @@ To enable this adapter, simply provide the following environment variable on sta
 | `QRIST_ENDPOINT` | The Qrist endpoint, this will be `https://qrist.app` |
 
 > [!TIP]
-> You can host your own [local instance of Qrist](https://github.com/gman-au/qrist/pkgs/container/qrist%2Fqrist) as well, if required. 
+> You can host your own [local instance of Qrist](https://github.com/gman-au/qrist/pkgs/container/qrist%2Fqrist) as well, if required.
+> 
 > If you do so, make sure to adjust the `QRIST_ENDPOINT` accordingly.
 
