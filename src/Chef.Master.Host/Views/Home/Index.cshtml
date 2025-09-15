@@ -1,7 +1,6 @@
-﻿@using Chef.Master.Host
+﻿@using Chef.Master.Interfaces
 @using Microsoft.AspNetCore.Html
 @using Microsoft.Extensions.Options
-@using Chef.Master.Interfaces
 @model Chef.Master.ViewModel.StatusViewModel;
 @inject IOptions<MyBuildConfiguration> MyBuildConfiguration
 @inject IEnumerable<IRecipeAdapter> Adapters
@@ -45,6 +44,10 @@
                     <small class="form-text text-muted">Put a web site link here and I will try to get the recipe from it.</small>
                     <input type="text" class="form-control" name="customImageUrl" value="@Model?.CustomImageUrl">
                     <small class="form-text text-muted">Custom image URL (if required).</small>
+                    <div class="form-check p-2 mx-3">
+                        <input type="checkbox" class="form-check-input" name="includeQrCode" value="True" checked/>
+                        <small class="form-check-label text-muted">Include QR code for ingredients list (if applicable).</small>
+                    </div>
                 </div>
                 <div class="col-lg-2">&nbsp;</div>
             </div>

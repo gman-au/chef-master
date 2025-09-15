@@ -55,7 +55,7 @@ namespace Chef.Master.Host.Controllers
                         ViewBag.PageTitle = $"{response.Recipe?.Title} - ({view})";
 
                         // apply QR code
-                        if (qristAdapter != null)
+                        if (qristAdapter != null && value.IncludeQrCode)
                         {
                             var qrCode =
                                 await
