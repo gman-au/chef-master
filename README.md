@@ -46,5 +46,6 @@ To enable this adapter, simply provide the following environment variable on sta
 | `QRIST_ENDPOINT` | The Qrist endpoint, this will be `https://qrist.app` |
 
 > [!TIP]
-> You can host your own [local instance of Qrist](https://github.com/gman-au/qrist/pkgs/container/qrist%2Fqrist) as well, if required. If you do so, make sure to adjust the `QRIST_ENDPOINT` accordingly.
+> You can host your own [local instance of Qrist](https://github.com/gman-au/qrist/pkgs/container/qrist%2Fqrist) as well, if required. 
+> If you do so, make sure to adjust the `QRIST_ENDPOINT` accordingly.
 
