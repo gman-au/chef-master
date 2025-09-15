@@ -39,14 +39,17 @@ To enable this adapter, simply provide the following environment variables on st
 > [!WARNING]
 > Each 'attempt' at doing this will incur a cost on your Groq account.
 
-
 ### Qrist (https://qrist.app/)
 
 [Qrist repo](https://github.com/gman-au/qrist)
 
 * `Qrist` contains an integration for [Todoist](https://www.todoist.com/), allowing you to add a QR code to the corner of the recipe page.
 * When you scan this QR code, Qrist will prompt you to confirm a block-add of *all of the ingredients on the recipe page* to your Todoist list.
-  * This can be a helpful shortcut when you print the recipe out and need a quick way of adding the recipe to your 'shopping list'.
+* This can be a helpful shortcut when you print the recipe out and need a quick way of adding the recipe to a 'shopping list'.
+
+<p align="center">
+  <img width="573" height="191" alt="image" src="https://github.com/user-attachments/assets/8bb758f3-f81d-42a7-9bc2-f99b5bad2bea" />
+</p>
 
 To enable this adapter, simply provide the following environment variable on startup:
 | Name | Value |
