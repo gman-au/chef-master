@@ -39,7 +39,7 @@ namespace Chef.Master.Infrastructure
 
             newResponse.Recipe = new RecipeViewModel
             {
-                Title = recipe?.Title,
+                Title = recipe?.Title.ToFormatted(),
                 ImageUrl = url,
                 Description = recipe?.Description.ToFormatted(),
                 Times = times,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Web;
 
 namespace Chef.Master.Infrastructure.Extensions
 {
@@ -89,6 +90,13 @@ namespace Chef.Master.Infrastructure.Extensions
         {
             value = WebUtility.HtmlDecode(value);
 
+            value =
+                value
+                    .Replace(
+                        "&nbsp;",
+                        " "
+                    );
+            
             return value;
         }
     }
